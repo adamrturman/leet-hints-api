@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-// require entry model
-const Entry = require('./../models/entry')
+// require challenge model
+const Challenge = require('./../models/challenge')
 const handle404 = require('./../lib/custom_errors')
 
 // CREATE
@@ -10,19 +10,19 @@ const handle404 = require('./../lib/custom_errors')
 router.post('/comments', (req, res, next) => {
   // get the comment data from the body of the request
   const commentData = req.body.comment
-  // get the entry id from the body
-  const entryId = commentData.entryId
-  // find the entry by its id
-  Entry.findById(entryId)
+  // get the challenge id from the body
+  const challengeId = commentData.challengeId
+  // find the challenge by its id
+  Challenge.findById(challengeId)
     .then(handle404)
-    .then(entry => {
-      // add comment to entry
-      entry.comments.push(commentData)
-      // save entry
-      return entry.save()
+    .then(challenge => {
+      // add comment to challenge
+      challenge.comments.push(commentData)
+      // save challenge
+      return challenge.save()
     })
     // send responsne back to client
-    .then(entry => res.status(201).json({entry: entry}))
+    .then(challenge => res.status(201).json({challenge: challenge}))
     .catch(next)
 })
 
@@ -30,14 +30,14 @@ router.post('/comments', (req, res, next) => {
 // DELETE /comments/:id
 router.delete('/comments/:id', (req, res, next) => {
   const id = req.params.id
-  Entry.findOne({ 'comments._id': id })
+  Challenge.findOne({ 'comments._id': id })
     .then(handle404)
-    .then(entry => {
-      entry.comments.id(id).remove()
+    .then(challenge => {
+      challenge.comments.id(id).remove()
       // Alternatively
-      // entrys.comments.pull(id)
+      // challenges.comments.pull(id)
 
-      return entry.save()
+      return challenge.save()
     })
     .then(() => res.sendStatus(204))
     .catch(next)
@@ -49,14 +49,14 @@ router.patch('/comments/:id', (req, res, next) => {
   const id = req.params.id
   const commentData = req.body.comment
 
-  Entry.findOne({
+  Challenge.findOne({
     'comments._id': id
   })
     .then(handle404)
-    .then(entry => {
-      const comment = entry.comments.id(id)
+    .then(challenge => {
+      const comment = challenge.comments.id(id)
       comment.set(commentData)
-      return entry.save()
+      return challenge.save()
     })
     .then(() => res.sendStatus(204))
     .catch(next)

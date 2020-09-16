@@ -3,8 +3,8 @@ const express = require('express')
 // Passport docs: http://www.passportjs.org/docs/
 const passport = require('passport')
 
-// pull in Mongoose model for entries
-const Entry = require('../models/entry')
+// pull in Mongoose model for challenges
+const Challenge = require('../models/challenge')
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -17,7 +17,7 @@ const handle404 = customErrors.handle404
 const requireOwnership = customErrors.requireOwnership
 
 // this is middleware that will remove blank fields from `req.body`, e.g.
-// { entry: { title: '', text: 'foo' } } -> { entry: { text: 'foo' } }
+// { challenge: { title: '', text: 'foo' } } -> { challenge: { text: 'foo' } }
 const removeBlanks = require('../../lib/remove_blank_fields')
 // passing this as a second argument to `router.<verb>` will make it
 // so that a token MUST be passed for that route to be available
@@ -28,43 +28,43 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
 // INDEX
-// GET /entries
-router.get('/entries', requireToken, (req, res, next) => {
-  Entry.find()
-    .then(entries => {
-      // `entries` will be an array of Mongoose documents
+// GET /challenges
+router.get('/challenges', requireToken, (req, res, next) => {
+  Challenge.find()
+    .then(challenges => {
+      // `challenges` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
       // apply `.toObject` to each one
-      return entries.map(entry => entry.toObject())
+      return challenges.map(challenge => challenge.toObject())
     })
-    // respond with status 200 and JSON of the entries
-    .then(entries => res.status(200).json({ entries: entries }))
+    // respond with status 200 and JSON of the challenges
+    .then(challenges => res.status(200).json({ challenges: challenges }))
     // if an error occurs, pass it to the handler
     .catch(next)
 })
 
 // SHOW
-// GET /entries/5a7db6c74d55bc51bdf39793
-router.get('/entries/:id', requireToken, (req, res, next) => {
+// GET /challenges/5a7db6c74d55bc51bdf39793
+router.get('/challenges/:id', requireToken, (req, res, next) => {
   // req.params.id will be set based on the `:id` in the route
-  Entry.findById(req.params.id)
+  Challenge.findById(req.params.id)
     .then(handle404)
-    // if `findById` is succesful, respond with 200 and "entry" JSON
-    .then(entry => res.status(200).json({ entry: entry.toObject() }))
+    // if `findById` is succesful, respond with 200 and "challenge" JSON
+    .then(challenge => res.status(200).json({ challenge: challenge.toObject() }))
     // if an error occurs, pass it to the handler
     .catch(next)
 })
 
 // CREATE
-// POST /entries
-router.post('/entries', requireToken, (req, res, next) => {
-  // set owner of new entry to be current user
-  req.body.entry.owner = req.user.id
+// POST /challenges
+router.post('/challenges', requireToken, (req, res, next) => {
+  // set owner of new challenge to be current user
+  req.body.challenge.owner = req.user.id
 
-  Entry.create(req.body.entry)
-    // respond to succesfull `create` with status 201 and JSON of new "entry"
+  Challenge.create(req.body.challenge)
+    // respond to succesfull `create` with status 201 and JSON of new "challenge"
     .then(data => {
-      res.status(201).json({ entry: data.toObject() })
+      res.status(201).json({ challenge: data.toObject() })
     })
     // if an error occurs, pass it off to our error handler
     // the error handler needs the error message and the `res` object so that it
@@ -73,21 +73,21 @@ router.post('/entries', requireToken, (req, res, next) => {
 })
 
 // UPDATE
-// PATCH /entries/5a7db6c74d55bc51bdf39793
-router.patch('/entries/:id', requireToken, removeBlanks, (req, res, next) => {
+// PATCH /challenges/5a7db6c74d55bc51bdf39793
+router.patch('/challenges/:id', requireToken, removeBlanks, (req, res, next) => {
   // if the client attempts to change the `owner` property by including a new
   // owner, prevent that by deleting that key/value pair
-  delete req.body.entry.owner
+  delete req.body.challenge.owner
 
-  Entry.findById(req.params.id)
+  Challenge.findById(req.params.id)
     .then(handle404)
-    .then(entry => {
+    .then(challenge => {
       // pass the `req` object and the Mongoose record to `requireOwnership`
       // it will throw an error if the current user isn't the owner
-      requireOwnership(req, entry)
+      requireOwnership(req, challenge)
 
       // pass the result of Mongoose's `.update` to the next `.then`
-      return entry.updateOne(req.body.entry)
+      return challenge.updateOne(req.body.challenge)
     })
     // if that succeeded, return 204 and no JSON
     .then(() => res.sendStatus(204))
@@ -96,15 +96,15 @@ router.patch('/entries/:id', requireToken, removeBlanks, (req, res, next) => {
 })
 
 // DESTROY
-// DELETE /entries/5a7db6c74d55bc51bdf39793
-router.delete('/entries/:id', requireToken, (req, res, next) => {
-  Entry.findById(req.params.id)
+// DELETE /challenges/5a7db6c74d55bc51bdf39793
+router.delete('/challenges/:id', requireToken, (req, res, next) => {
+  Challenge.findById(req.params.id)
     .then(handle404)
-    .then(entry => {
-      // throw an error if current user doesn't own `entry`
-      requireOwnership(req, entry)
-      // delete the entry ONLY IF the above didn't throw
-      entry.deleteOne()
+    .then(challenge => {
+      // throw an error if current user doesn't own `challenge`
+      requireOwnership(req, challenge)
+      // delete the challenge ONLY IF the above didn't throw
+      challenge.deleteOne()
     })
     // send back 204 and no content if the deletion succeeded
     .then(() => res.sendStatus(204))
