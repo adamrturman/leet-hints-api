@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const commentSchema = require('./comment')
 
-const entrySchema = new mongoose.Schema({
+const challengeSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -32,9 +32,12 @@ const entrySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
+  },
+  ownerName: {
+    type: String
   }
 }, {
   timestamps: true
 })
 
-module.exports = mongoose.model('Entry', entrySchema)
+module.exports = mongoose.model('challenge', challengeSchema)

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 API="http://localhost:4741"
-URL_PATH="/entries"
+URL_PATH="/challenges"
 
 curl "${API}${URL_PATH}" \
   --include \
@@ -9,7 +9,7 @@ curl "${API}${URL_PATH}" \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer ${TOKEN}" \
   --data '{
-    "entry": {
+    "challenge": {
       "title": "'"${TITLE}"'",
       "description": "'"${DESC}"'",
       "difficulty": "'"${DIFF}"'",

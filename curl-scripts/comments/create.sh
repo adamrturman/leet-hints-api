@@ -1,9 +1,9 @@
 #!/bin/bash
 
 API="http://localhost:4741"
-URL_PATH="/comments"
+URL_PATH="/challenges"
 
-curl "${API}${URL_PATH}" \
+curl "${API}${URL_PATH}/${ID}/comments" \
   --include \
   --request POST \
   --header "Content-Type: application/json" \
@@ -11,9 +11,7 @@ curl "${API}${URL_PATH}" \
   --data '{
     "comment": {
       "text": "'"${TEXT}"'",
-      "title": "'"${TITLE}"'",
-      "entryId": "'"${ENTRY_ID}"'",
-      "userId": "'"${USER_ID}"'"
+      "title": "'"${TITLE}"'"
     }
   }'
 
