@@ -1,6 +1,7 @@
 # Leet Hints: A Description
 
-Leet Hints is a collection of coding problems that I've solved along with descriptions/hints of approaches to solve the problem.
+Developers of all skill levels want
+Leet Hints is a collection of coding problems that I've solved along with descriptions/hints of approaches to solve the problem. A user can create an account, view existing challenges and hints, or add their own. A user can also comment on challenges posted by other users. The goal of my app is two-fold: connect developers as they build their skills and as a way of displaying my growing knowledge of algorithms and data structures to others in the field.
 
 ## Important Links
 
@@ -13,13 +14,13 @@ Leet Hints is a collection of coding problems that I've solved along with descri
 
 - Create the API models and routes.
 - Test API connections.
-- Build basic front end components.
+- Build challenge component.
+- Build comment component.
 - Test front end to back end connection.
-- Integrate Stripe API to handle credit a
 - Create styling for front end objects.
 - Test, debug, troubleshoot and debug.
 - Reach for stretch goals
-- [Gantt Chart](https://docs.google.com/spreadsheets/d/1xvZ6CXHSKE_Q4nan2bH51XatrNw7pyXpcjKPrnNClT8/edit?usp=sharing)
+- [Gantt Chart](https://docs.google.com/spreadsheets/d/1jMsdbGDk3BtpUTYFcJaJ0UisjW4lh4EhNEzdovmv4jI/edit?usp=sharing)
 
 ## API End Points
 
@@ -30,19 +31,12 @@ Leet Hints is a collection of coding problems that I've solved along with descri
 | DELETE | `/sign-out`             | `users#signout`            | `true`          |
 | PATCH  | `/change-password`      | `users#changepw`           | `true`          |
 | PATCH  | `/update-user`          | `users#updateuser`         | `true`          |
-| GET    | `/items`                | `items#index`              | `true`          |
-| GET    | `/items/:id`            | `items#show`               | `true`          |
-| POST   | `/items`                | `items#create`             | `true`          |
-| PATCH  | `/carts/:id`            | `carts#update`             | `true`          |
-| DELETE | `/carts/:id`            | `carts#delete`             | `true`          |
-| GET    | `/carts`                | `carts#index`              | `true`          |
-| GET    | `/carts/:id`            | `carts#show`               | `true`          |
-| POST   | `/carts`                | `carts#create`             | `true`          |
-| PATCH  | `/carts/:id`            | `carts#update`             | `true`          |
-| DELETE | `/carts/:id`            | `carts#delete`             | `true`          |
-| POST   | `/create-payment-intent`| `payment-intent#create`    | `true`          |
-| GET    | `/secret`               | `secret#show`              | `true`          |
-| POST   | `/pay`                  | `pay#create`               | `true`          |
+| GET    | `/challenges`           | `challenges#index`         | `true`          |
+| GET    | `/challenges/:id`       | `challenges#show`          | `true`          |
+| POST   | `/challenges`           | `challenges#create`        | `true`          |
+| PATCH  | `/challenges/:id`       | `challenges#update`        | `true`          |
+| DELETE | `/challenges/:id`       | `challenges#delete`        | `true`          |
+
 
 All data returned from API actions is formatted as JSON.
 
@@ -54,7 +48,6 @@ All data returned from API actions is formatted as JSON.
 - CSS
 - Bootstrap
 - Express
-- Stripe
 - Mongoose
 - MongoDB
 
