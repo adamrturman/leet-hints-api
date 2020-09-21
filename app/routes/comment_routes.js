@@ -2,10 +2,11 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 const requireToken = passport.authenticate('bearer', { session: false })
-
+const customErrors = require('../../lib/custom_errors')
 // require challenge model
 const Challenge = require('./../models/challenge')
 const handle404 = require('./../../lib/custom_errors')
+const requireOwnership = customErrors.requireOwnership
 
 // CREATE
 // POST /comments/
@@ -39,6 +40,7 @@ router.delete('/challenges/:id/comments/:comment_id', requireToken, (req, res, n
   Challenge.findById(challengeId)
     .then(handle404)
     .then(challenge => {
+      requireOwnership(req, challenge)
       challenge.comments.id(commentId).remove()
       // Alternatively
       // challenges.comments.pull(id)
