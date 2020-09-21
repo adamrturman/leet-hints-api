@@ -31,15 +31,18 @@ router.post('/challenges/:id/comments', requireToken, (req, res, next) => {
 
 // DESTROY
 // DELETE /comments/:id
-router.delete('/challenges/:id/comments/:id', requireToken, (req, res, next) => {
-  const id = req.params.id
-  Challenge.findOne({ 'comments._id': id })
+router.delete('/challenges/:id/comments/:comment_id', requireToken, (req, res, next) => {
+  const challengeId = req.params.id
+  const commentId = req.params.comment_id
+  console.log('this is req.params.id', req.params.id)
+  console.log('this is req.params.comment_id', req.params.comment_id)
+  Challenge.findById(challengeId)
     .then(handle404)
     .then(challenge => {
-      challenge.comments.id(id).remove()
+      challenge.comments.id(commentId).remove()
       // Alternatively
       // challenges.comments.pull(id)
-
+      console.log('this is commentId', commentId)
       return challenge.save()
     })
     .then(() => res.sendStatus(204))

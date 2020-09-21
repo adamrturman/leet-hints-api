@@ -22,6 +22,12 @@ Leet Hints is a collection of coding problems that I've solved along with descri
 - Reach for stretch goals
 - [Gantt Chart](https://docs.google.com/spreadsheets/d/1jMsdbGDk3BtpUTYFcJaJ0UisjW4lh4EhNEzdovmv4jI/edit?usp=sharing)
 
+## Set Up Instructions
+- Fork and clone this repository.
+- Once inside the directory, install dependencies with `npm install`
+- Be sure `nodemon` is not included in the package.json, install it with `npm install -g nodemon`.
+- Run the server with `npm run server`.
+
 ## API End Points
 
 | Verb   | URI Pattern                    | Controller#Action   | Token Required |
