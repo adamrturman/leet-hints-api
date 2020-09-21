@@ -10,12 +10,6 @@ const handle404 = require('./../../lib/custom_errors')
 // CREATE
 // POST /comments/
 router.post('/challenges/:id/comments', requireToken, (req, res, next) => {
-  console.log('this is req.params.id:', req.params.id)
-  console.log('this is req.body', req.body)
-  console.log('this is req.user._id', req.user._id)
-  console.log('this is req.body.comment', req.body.comment)
-  console.log('this is req.body.comment.title', req.body.comment.title)
-  console.log('this is req.body.comment.text', req.body.comment.text)
   // get the comment data from the body of the request
   const commentData = req.body.comment
   commentData.owner = req.user._id
@@ -37,7 +31,7 @@ router.post('/challenges/:id/comments', requireToken, (req, res, next) => {
 
 // DESTROY
 // DELETE /comments/:id
-router.delete('/comments/:id', (req, res, next) => {
+router.delete('/challenges/:id/comments/:id', requireToken, (req, res, next) => {
   const id = req.params.id
   Challenge.findOne({ 'comments._id': id })
     .then(handle404)
@@ -54,7 +48,7 @@ router.delete('/comments/:id', (req, res, next) => {
 
 // UPDATE
 // PATCH /comments/:id
-router.patch('/comments/:id', (req, res, next) => {
+router.patch('/challenges/:id/comments/:comment_id', requireToken, (req, res, next) => {
   const id = req.params.id
   const commentData = req.body.comment
 

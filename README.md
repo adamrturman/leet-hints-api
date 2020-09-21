@@ -24,18 +24,21 @@ Leet Hints is a collection of coding problems that I've solved along with descri
 
 ## API End Points
 
-| Verb   | URI Pattern            | Controller#Action           | Token Required  |
-|--------|------------------------|-----------------------------|-----------------|
-| POST   | `/sign-up`              | `users#signup`             | `false`         |
-| POST   | `/sign-in`              | `users#signin`             | `false`         |
-| DELETE | `/sign-out`             | `users#signout`            | `true`          |
-| PATCH  | `/change-password`      | `users#changepw`           | `true`          |
-| PATCH  | `/update-user`          | `users#updateuser`         | `true`          |
-| GET    | `/challenges`           | `challenges#index`         | `true`          |
-| GET    | `/challenges/:id`       | `challenges#show`          | `true`          |
-| POST   | `/challenges`           | `challenges#create`        | `true`          |
-| PATCH  | `/challenges/:id`       | `challenges#update`        | `true`          |
-| DELETE | `/challenges/:id`       | `challenges#delete`        | `true`          |
+| Verb   | URI Pattern                    | Controller#Action   | Token Required |
+|--------|--------------------------------|---------------------|-------------|
+| POST   | `/sign-up`                     | `users#signup`      | `false`     |
+| POST   | `/sign-in`                     | `users#signin`      | `false`     |
+| DELETE | `/sign-out`                    | `users#signout`     | `true`      |
+| PATCH  | `/change-password`             | `users#changepw`    | `true`      |
+| PATCH  | `/update-user`                 | `users#updateuser`  | `true`      |
+| GET    | `/challenges`                  | `challenges#index`  | `true`      |
+| GET    | `/challenges/:id`              | `challenges#show`   | `true`      |
+| POST   | `/challenges`                  | `challenges#create` | `true`      |
+| PATCH  | `/challenges/:id`              | `challenges#update` | `true`      |
+| DELETE | `/challenges/:id`              | `challenges#delete` | `true`      |
+| POST   | `/challenges/:id/comments`     | `comments#create`   | `true`      |
+| PATCH  | `/challenges/:id/comments/:id` | `comments#update`   | `true`      |
+| DELETE | `/challenges/:id/comments/:id` | `comments#delete`   | `true`      |
 
 
 All data returned from API actions is formatted as JSON.
