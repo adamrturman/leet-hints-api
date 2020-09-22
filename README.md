@@ -62,5 +62,8 @@ All data returned from API actions is formatted as JSON.
 ## Images
 
 #### ERD:
+A single user can create many challenges.
+A single challenge can have many comments.
+A single user create many comments.
 
 ![ERD](https://user-images.githubusercontent.com/67024033/93880186-aa487c00-fca2-11ea-9340-de66916f2164.png)
