@@ -6,7 +6,7 @@ Leet Hints is a collection of coding problems that I've solved along with descri
 ## Important Links
 
 - [GitHub API Repo](https://github.com/adamrturman/leet-hints-api)
-- [Deployed API](https://nameless-anchorage-32520.herokuapp.com/)
+- [Deployed API](https://nameless-anchorage-32520.herokuapp.com)
 - [GitHub Client Repo](https://github.com/adamrturman/leet-hints-client)
 - [Deployed Client](https://adamrturman.github.io/leet-hints-client/#/)
 
