@@ -5,10 +5,10 @@ Leet Hints is a collection of coding problems that I've solved along with descri
 
 ## Important Links
 
-- [GitHub API Repo](https://github.com/adamrturman/leet-hints-api)
-- [Deployed API](https://nameless-anchorage-32520.herokuapp.com)
-- [GitHub Client Repo](https://github.com/adamrturman/leet-hints-client)
-- [Deployed Client](https://adamrturman.github.io/leet-hints-client/#/)
+- [GitHub API Repo](https://github.com/worldwide-coders/educational-store-api)
+- [Deployed API](https://thawing-basin-32932.herokuapp.com)
+- [GitHub Client Repo](https://github.com/worldwide-coders/educational-store)
+- [Deployed Client](https://worldwide-coders.github.io/educational-store/#/)
 
 ## Planning Story
 
@@ -26,7 +26,7 @@ Leet Hints is a collection of coding problems that I've solved along with descri
 - Fork and clone this repository.
 - Once inside the directory, install dependencies with `npm install`
 - Be sure `nodemon` is not included in the package.json, install it with `npm install -g nodemon`.
-- Start the server with `npm run server`.
+- Run the server with `npm run server`.
 
 ## API End Points
 
@@ -43,6 +43,7 @@ Leet Hints is a collection of coding problems that I've solved along with descri
 | PATCH  | `/challenges/:id`              | `challenges#update` | `true`      |
 | DELETE | `/challenges/:id`              | `challenges#delete` | `true`      |
 | POST   | `/challenges/:id/comments`     | `comments#create`   | `true`      |
+| PATCH  | `/challenges/:id/comments/:id` | `comments#update`   | `true`      |
 | DELETE | `/challenges/:id/comments/:id` | `comments#delete`   | `true`      |
 
 
@@ -59,8 +60,16 @@ All data returned from API actions is formatted as JSON.
 - Mongoose
 - MongoDB
 
+### Unsolved Problems
+
+- Ability to search for an item by name
+- Better styling for multiple media queries
+- Would like to have additional resources to share, such as books, movies, tools etc.
+- Would like to add thank comments to each resource.
+- Would like to actually send a request to the owner of the resource, so that a person can borrow said item.
+
 ## Images
 
 #### ERD:
 
-![ERD](https://user-images.githubusercontent.com/67024033/93880186-aa487c00-fca2-11ea-9340-de66916f2164.png)
+![ERD](https://i.imgur.com/iwe6nV4.png)
