@@ -35,6 +35,8 @@ router.post('/challenges/:id/comments', requireToken, (req, res, next) => {
 router.delete('/challenges/:id/comments/:comment_id', requireToken, (req, res, next) => {
   const challengeId = req.params.id
   const commentId = req.params.comment_id
+  console.log('this is req.params.id', req.params.id)
+  console.log('this is req.params.comment_id', req.params.comment_id)
   Challenge.findById(challengeId)
     .then(handle404)
     .then(challenge => {
@@ -42,6 +44,7 @@ router.delete('/challenges/:id/comments/:comment_id', requireToken, (req, res, n
       challenge.comments.id(commentId).remove()
       // Alternatively
       // challenges.comments.pull(id)
+      console.log('this is commentId', commentId)
       return challenge.save()
     })
     .then(() => res.sendStatus(204))
@@ -51,14 +54,15 @@ router.delete('/challenges/:id/comments/:comment_id', requireToken, (req, res, n
 // UPDATE
 // PATCH /comments/:id
 router.patch('/challenges/:id/comments/:comment_id', requireToken, (req, res, next) => {
+  const id = req.params.id
   const commentData = req.body.comment
-  const commentId = req.params.comment_id
-  const challengeId = req.params.id
-  Challenge.findById(challengeId)
+
+  Challenge.findOne({
+    'comments._id': id
+  })
     .then(handle404)
     .then(challenge => {
-      requireOwnership(req, challenge)
-      const comment = challenge.comments.id(commentId)
+      const comment = challenge.comments.id(id)
       comment.set(commentData)
       return challenge.save()
     })
