@@ -10,7 +10,7 @@ const requireOwnership = customErrors.requireOwnership
 
 // CREATE
 // POST /comments/
-router.post('/challenges/:id/comments', requireToken, requireOwnership, (req, res, next) => {
+router.post('/challenges/:id/comments', requireToken, (req, res, next) => {
   // get the comment data from the body of the request
   const commentData = req.body.comment
   commentData.owner = req.user._id

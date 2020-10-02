@@ -10,7 +10,7 @@ const commentSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  commentOwnerName: {
+  ownerName: {
     type: String
   }
 }, {

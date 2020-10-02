@@ -4,22 +4,28 @@ const commentSchema = require('./comment')
 
 const challengeSchema = new mongoose.Schema({
   title: {
-    type: String
+    type: String,
+    required: true
   },
   description: {
-    type: String
+    type: String,
+    required: true
   },
   difficulty: {
-    type: String
+    type: String,
+    required: true
   },
   link: {
-    type: String
+    type: String,
+    required: true
   },
   hint: {
-    type: String
+    type: String,
+    required: true
   },
   complexity: {
-    type: String
+    type: String,
+    required: true
   },
   comments: [commentSchema],
   owner: {
